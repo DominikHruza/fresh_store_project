@@ -13,7 +13,7 @@
             </tr>
           </thead>
           <tbody>
-            <cart-item></cart-item>
+            <cart-item v-for="cartItem in cartItems" :key="cartItem.id" :item="cartItem"></cart-item>
           </tbody>
           <tfoot>
             <tr>
@@ -39,7 +39,8 @@
               </td>
               <td>
                 <button type="button" class="btn btn-success">
-                  Checkout <span class="glyphicon glyphicon-play"></span>
+                  Checkout
+                  <span class="glyphicon glyphicon-play"></span>
                 </button>
               </td>
             </tr>
@@ -55,6 +56,22 @@ import CartItem from "../components/CartItem";
 export default {
   components: {
     CartItem,
+  },
+
+  data() {
+    return {
+      cartItems: [],
+    };
+  },
+
+  methods: {
+    getAllCartItems() {
+      this.cartItems = this.$store.state.cart.cartItems;
+    },
+  },
+
+  created() {
+    this.getAllCartItems();
   },
 };
 </script>

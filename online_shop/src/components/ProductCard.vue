@@ -13,9 +13,9 @@
           <div class="price text-success">
             <h5 class="mt-4">€ {{ item.price }}</h5>
           </div>
-          <a href="#" class="btn btn-danger mt-3">
+          <button href="#" class="btn btn-danger mt-3" @click="handleAddClick">
             <i class="fas fa-shopping-cart"></i> Add to Cart
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -25,6 +25,31 @@
 <script>
 export default {
   props: ["colWidth", "item"],
+
+  methods: {
+    async handleAddClick() {
+      const { cartItems } = this.$store.state.cart;
+      //Check if item already in cart
+      const itemInCart = cartItems.find(
+        (item) => item.id === this.item.id_product
+      );
+      console.log(itemInCart);
+      if (itemInCart) {
+        console.log("uso");
+        await this.$store.dispatch("incrementItem", this.item.id_product);
+        return;
+      }
+
+      const cartItem = {
+        id: this.item.id_product,
+        name: this.item.name,
+        price: this.item.price,
+        imageUrl: this.item.image_url,
+        quantity: 1,
+      };
+      this.$store.dispatch("addToCart", cartItem);
+    },
+  },
 };
 </script>
 

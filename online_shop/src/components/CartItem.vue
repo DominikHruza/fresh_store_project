@@ -1,48 +1,124 @@
 <template>
   <tr>
-    <td class="col-sm-8 col-md-6">
+    <td class="product-col col-sm-8 col-md-6">
       <div class="media">
         <a class="thumbnail pull-left" href="#">
-          <img
-            class="media-object"
-            src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png"
-            style="width: 72px; height: 72px;"
-          />
+          <img class="media-object" :src="item.imageUrl" style="width: 72px; height: 72px;" />
         </a>
         <div class="media-body">
-          <h4 class="media-heading"><a href="#">Product name</a></h4>
-          <h5 class="media-heading">by <a href="#">Brand name</a></h5>
-          <span>Status: </span
-          ><span class="text-success"><strong>In Stock</strong></span>
+          <h4 class="media-heading">
+            <a href="#">{{item.name}}</a>
+          </h4>
         </div>
       </div>
     </td>
     <td class="col-sm-1 col-md-1" style="text-align: center">
-      <input
-        type="email"
-        class="form-control"
-        id="exampleInputEmail1"
-        value="3"
-      />
+      <div class="center">
+        <div class="input-group">
+          <span class="input-group-btn">
+            <!-- Decrement item -->
+            <button
+              type="button"
+              class="btn btn-danger btn-number"
+              data-type="minus"
+              data-field="quant[2]"
+            >
+              <span>
+                <i class="fa fa-minus" aria-hidden="true"></i>
+              </span>
+            </button>
+          </span>
+          <!-- Input value -->
+          <input type="text" name="quant[2]" class="input-number" value="10" min="1" max="100" />
+          <span class="input-group-btn">
+            <!-- Increment item -->
+            <button
+              type="button"
+              class="btn btn-success btn-number"
+              data-type="plus"
+              data-field="quant[2]"
+            >
+              <span>
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </span>
+            </button>
+          </span>
+        </div>
+      </div>
     </td>
     <td class="col-sm-1 col-md-1 text-center">
-      <strong>$4.87</strong>
+      <strong>${{item.price}}</strong>
     </td>
     <td class="col-sm-1 col-md-1 text-center">
-      <strong>$14.61</strong>
+      <strong>${{itemTotal}}</strong>
     </td>
     <td class="col-sm-1 col-md-1">
-      <button type="button" class="btn btn-danger">
-        <span class="glyphicon glyphicon-remove"></span> Remove
+      <button>
+        <button
+          class="btn btn-danger btn-sm rounded-0"
+          type="button"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Delete"
+        >
+          <i class="fa fa-trash"></i>
+        </button>
       </button>
     </td>
   </tr>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
-    
+  props: ["item"],
+
+  data() {
+    return {
+      quantity: null,
+      itemTotal: null,
+    };
+  },
+
+  methods: {
+    ...mapActions(["incrementItem", "decrementItem"]),
+
+    setQuantity() {
+      this.quantity = this.item.quantity;
+    },
+    setItemTotal() {
+      this.itemTotal = this.item.price * this.quantity;
+    },
+
+    handleInputChange() {
+      this.itemTotal = this.item.price * this.quantity;
+      this.incrementItem(this.item.id);
+    },
+  },
+
+  async created() {
+    await this.setQuantity();
+    this.setItemTotal();
+  },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.product-col {
+  text-transform: uppercase !important;
+}
+.center {
+  width: 130px;
+  margin: auto;
+}
+
+.btn-number {
+  padding: 2px 4px;
+}
+
+.input-number {
+  padding: 2px 4px;
+  height: auto;
+  width: 30px !important;
+}
+</style>
