@@ -24,7 +24,7 @@
                 <h3>Total</h3>
               </td>
               <td class="text-right">
-                <h3>$31.53</h3>
+                <h3>€{{this.$store.state.cart.cartTotal}}</h3>
               </td>
             </tr>
             <tr>
@@ -75,3 +75,5 @@ export default {
   },
 };
 </script>
+<style scoped>
+</style>

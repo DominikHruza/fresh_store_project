@@ -1,14 +1,11 @@
 <template>
-  <tr>
+  <tr class="item-row">
     <td class="product-col col-sm-8 col-md-6">
       <div class="media">
-        <a class="thumbnail pull-left" href="#">
-          <img class="media-object" :src="item.imageUrl" style="width: 72px; height: 72px;" />
-        </a>
+        <img class="media-object" :src="item.imageUrl" style="width: 72px; height: 72px;" />
+
         <div class="media-body">
-          <h4 class="media-heading">
-            <a href="#">{{item.name}}</a>
-          </h4>
+          <h4 class="media-heading item-name">{{item.name}}</h4>
         </div>
       </div>
     </td>
@@ -17,27 +14,17 @@
         <div class="input-group">
           <span class="input-group-btn">
             <!-- Decrement item -->
-            <button
-              type="button"
-              class="btn btn-danger btn-number"
-              data-type="minus"
-              data-field="quant[2]"
-            >
+            <button type="button" class="btn btn-danger btn-number" @click="handleDecrement">
               <span>
                 <i class="fa fa-minus" aria-hidden="true"></i>
               </span>
             </button>
           </span>
           <!-- Input value -->
-          <input type="text" name="quant[2]" class="input-number" value="10" min="1" max="100" />
+          <input type="text" class="input-number" :value="quantity" min="1" max="100" />
           <span class="input-group-btn">
             <!-- Increment item -->
-            <button
-              type="button"
-              class="btn btn-success btn-number"
-              data-type="plus"
-              data-field="quant[2]"
-            >
+            <button type="button" class="btn btn-success btn-number" @click="handleIncrement">
               <span>
                 <i class="fa fa-plus" aria-hidden="true"></i>
               </span>
@@ -47,10 +34,10 @@
       </div>
     </td>
     <td class="col-sm-1 col-md-1 text-center">
-      <strong>${{item.price}}</strong>
+      <strong>€{{item.price}}</strong>
     </td>
     <td class="col-sm-1 col-md-1 text-center">
-      <strong>${{itemTotal}}</strong>
+      <strong>€{{itemTotal}}</strong>
     </td>
     <td class="col-sm-1 col-md-1">
       <button>
@@ -81,7 +68,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(["incrementItem", "decrementItem"]),
+    ...mapActions(["updateItemQty"]),
 
     setQuantity() {
       this.quantity = this.item.quantity;
@@ -90,9 +77,16 @@ export default {
       this.itemTotal = this.item.price * this.quantity;
     },
 
-    handleInputChange() {
-      this.itemTotal = this.item.price * this.quantity;
-      this.incrementItem(this.item.id);
+    handleIncrement() {
+      this.quantity++;
+      this.itemTotal = this.quantity * this.item.price;
+      this.updateItemQty({ updateID: this.item.id, type: "increment" });
+    },
+
+    handleDecrement() {
+      this.quantity--;
+      this.itemTotal = this.quantity * this.item.price;
+      this.updateItemQty({ updateID: this.item.id, type: "decrement" });
     },
   },
 
@@ -104,6 +98,9 @@ export default {
 </script>
 
 <style scoped>
+.item-row {
+  text-align: center;
+}
 .product-col {
   text-transform: uppercase !important;
 }
@@ -120,5 +117,10 @@ export default {
   padding: 2px 4px;
   height: auto;
   width: 30px !important;
+  text-align: center;
+}
+
+.item-name {
+  font-size: 18px;
 }
 </style>
