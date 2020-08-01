@@ -12,7 +12,8 @@
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "multer": "^1.4.2",
-    "mysql2": "^2.1.0"
+    "mysql2": "^2.1.0",
+    "stripe": "^8.81.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
