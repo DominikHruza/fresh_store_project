@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
     <div class="container">
       <router-link to="/" class="navbar-brand" href="#">Fresh Stop</router-link>
       <button
@@ -22,7 +22,9 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/cart" class="nav-link" href="#">Cart</router-link>
+            <router-link to="/cart" class="nav-link" href="#">
+              <i class="fas fa-shopping-cart mr-1"></i> Cart
+            </router-link>
           </li>
         </ul>
       </div>
@@ -50,6 +52,13 @@ export default {};
   text-transform: uppercase;
   padding-left: 1rem;
   padding-right: 1rem;
-  border-bottom: #fff 2px solid;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
 }
 </style>

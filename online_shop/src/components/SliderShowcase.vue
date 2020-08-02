@@ -9,33 +9,27 @@
       <div class="carousel-inner">
         <div class="carousel-item carousel-image-1 active">
           <div class="container">
-            <div class="carousel-caption d-none d-sm-block text-right mb-5">
+            <div class="carousel-caption d-sm-block text-right mb-5">
               <h1 class="display-3 heading-1">Always Fresh</h1>
-              <router-link to="/shop" class="btn btn-primary btn-lg"
-                >Shop Now</router-link
-              >
+              <router-link to="/shop" class="btn btn-primary btn-lg">Shop Now</router-link>
             </div>
           </div>
         </div>
 
         <div class="carousel-item carousel-image-2">
           <div class="container">
-            <div class="carousel-caption d-none d-sm-block mb-5">
+            <div class="carousel-caption d-sm-block mb-5">
               <h1 class="display-3 heading-1">We Deliver to Your Door</h1>
-              <router-link to="/shop" class="btn btn-primary btn-lg"
-                >Shop Now</router-link
-              >
+              <router-link to="/shop" class="btn btn-primary btn-lg">Shop Now</router-link>
             </div>
           </div>
         </div>
 
         <div class="carousel-item carousel-image-3">
           <div class="container">
-            <div class="carousel-caption d-none d-sm-block text-right mb-5">
+            <div class="carousel-caption d-sm-block text-right mb-5">
               <h1 class="display-3 heading-3">Top Quality Goods</h1>
-              <router-link to="/shop" class="btn btn-primary btn-lg"
-                >Shop Now</router-link
-              >
+              <router-link to="/shop" class="btn btn-primary btn-lg">Shop Now</router-link>
             </div>
           </div>
         </div>

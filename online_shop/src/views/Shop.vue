@@ -4,8 +4,8 @@
       <div class="col-sm-12 col-md-2 pt-5 m-3">
         <category-sidebar @categorySelected="handleCategorySelect" @selectedAll="handleSelectAll"></category-sidebar>
       </div>
-      <div class="col-sm-12 col-md-8 m-auto">
-        <div class="row">
+      <div class="col-sm-12 col-md-8">
+        <div class="row mx-auto">
           <p>{{this.$store.loading}}</p>
           <ProductCard
             v-for="product in products"

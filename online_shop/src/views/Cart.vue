@@ -14,11 +14,7 @@
             </tr>
           </thead>
           <tbody>
-            <cart-item
-              v-for="cartItem in cartItems"
-              :key="cartItem.id"
-              :item="cartItem"
-            ></cart-item>
+            <cart-item v-for="cartItem in cartItems" :key="cartItem.id" :item="cartItem"></cart-item>
           </tbody>
           <tfoot>
             <tr>
@@ -88,12 +84,13 @@ export default {
       this.$router.push({ name: "Checkout" });
     },
 
-    handleCheckout() {},
+    handleCheckout() {
+      this.postPaymentIntent(this.cartItems);
+    },
   },
 
   async created() {
-    await this.getAllCartItems();
-    this.postPaymentIntent(this.cartItems);
+    this.getAllCartItems();
   },
 };
 </script>

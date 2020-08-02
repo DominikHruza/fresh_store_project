@@ -1,6 +1,8 @@
 <template>
   <form id="payment-form">
-    <div id="card-element"><!--Stripe.js injects the Card Element--></div>
+    <div id="card-element">
+      <!--Stripe.js injects the Card Element-->
+    </div>
     <button id="submit" type="button" class="btn btn-primary">
       <div class="spinner hidden" id="spinner"></div>
       <span id="button-text">Pay</span>
@@ -8,7 +10,7 @@
     <p id="card-error" role="alert"></p>
     <p class="result-message hidden">
       Payment succeeded, see the result in your
-      <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay
+      <a href target="_blank">Stripe dashboard.</a> Refresh the page to pay
       again.
     </p>
   </form>
@@ -20,10 +22,12 @@ export default {
   data() {
     return {
       postPaymentIntent,
-      cartItems: this.$store.state.cart.cartItems,
     };
   },
 
+  computed: {
+    cartItems: this.$store.state.cart.cartItems,
+  },
   created() {
     postPaymentIntent(this.cartItems);
   },

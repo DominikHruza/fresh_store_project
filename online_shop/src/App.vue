@@ -1,7 +1,9 @@
 <template>
   <div>
     <navbar></navbar>
-    <router-view></router-view>
+    <div class="container-fluid mt-5">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
