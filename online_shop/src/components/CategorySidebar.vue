@@ -91,5 +91,6 @@ export default {
 .cat-toggle {
   position: fixed;
   z-index: 3;
+  color: #fff;
 }
 </style>

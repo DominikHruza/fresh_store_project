@@ -8,10 +8,19 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     loading: false,
+    alerts: [],
     categories: [],
   },
 
   mutations: {
+    SET_ALERTS(state, payload) {
+      state.alerts = [...state.alerts, payload];
+    },
+
+    REMOVE_ALERT(state) {
+      state.alerts.shift();
+    },
+
     SET_CATEGORIES(state, payload) {
       state.categories = [...payload];
     },
@@ -29,6 +38,10 @@ export default new Vuex.Store({
 
     isLoading({ commit }, payload) {
       commit("SET_LOADING", payload);
+    },
+
+    removeAlert({ commit }) {
+      commit("REMOVE_ALERT");
     },
   },
 

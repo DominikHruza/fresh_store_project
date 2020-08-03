@@ -29,6 +29,13 @@ import ProductCard from "../components/ProductCard";
 import Loader from "../components/Loader";
 
 export default {
+  components: {
+    CategorySidebar,
+    ProductCard,
+    Observer,
+    Loader,
+  },
+
   data() {
     return {
       categorySelected: null,
@@ -39,12 +46,13 @@ export default {
 
   methods: {
     async getProducts() {
-      //Only if all products are selected
-      if (!this.categorySelected) {
-        this.getAllProducts();
-      } else {
-        this.getProductByCategory(this.categorySelected);
-      }
+      if (!this.$store.state.loading)
+        if (!this.categorySelected) {
+          //Only if all products are selected
+          await this.getAllProducts();
+        } else {
+          await this.getProductByCategory(this.categorySelected);
+        }
     },
     async getAllProducts() {
       this.$store.dispatch("isLoading", true);
@@ -78,13 +86,6 @@ export default {
       this.products = [];
       this.categorySelected = null;
     },
-  },
-
-  components: {
-    CategorySidebar,
-    ProductCard,
-    Observer,
-    Loader,
   },
 };
 </script>

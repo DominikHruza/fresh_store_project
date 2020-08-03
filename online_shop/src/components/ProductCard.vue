@@ -28,13 +28,20 @@
             <i class="fas fa-shopping-cart"></i> Add to Cart
           </button>
         </div>
+        <div v-for="(alert, index) in getAlerts" :key="index"></div>
+        <AlertBox :alertMsg="alert.msg" color="success" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import AlertBox from "../components/AlertBox";
 export default {
+  components: {
+    AlertBox,
+  },
+
   props: ["colWidth", "item"],
 
   methods: {
@@ -50,6 +57,8 @@ export default {
           updateID: this.item.id_product,
           type: "increment",
         });
+
+        this.$store.commit("SET_ALERTS", { msg: "Item added to cart!" });
         return;
       }
 
@@ -63,6 +72,18 @@ export default {
       this.$store.dispatch("addToCart", cartItem);
     },
   },
+  computed: {
+    getAlerts: () => {
+      return this.$store.state.alerts;
+    },
+  },
+  watch: {
+    getAlerts(val) {
+      setTimeout(() => {
+        if (val.length !== 0) this.removeAlert();
+      }, 3000);
+    },
+  },
 };
 </script>
 
@@ -74,7 +95,7 @@ export default {
 }
 
 .card-title {
-   text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 img {

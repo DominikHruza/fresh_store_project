@@ -2,7 +2,8 @@
   <div class="container">
     <CheckoutModal />
     <div class="row">
-      <div class="col-sm-12 col-md-10 col-md-offset-1">
+      <h2 class="no-items" v-if="getCartItems.length === 0">No items in cart</h2>
+      <div v-else class="col-sm-12 col-md-10 col-md-offset-1">
         <table class="table table-hover">
           <thead>
             <tr>
@@ -14,7 +15,11 @@
             </tr>
           </thead>
           <tbody>
-            <cart-item v-for="cartItem in getcartItems" :key="cartItem.id" :item="cartItem"></cart-item>
+            <cart-item
+              v-for="(cartItem, idx) in getCartItems"
+              :key="`${Date.now()-idx}`"
+              :item="cartItem"
+            ></cart-item>
           </tbody>
           <tfoot>
             <tr>
@@ -32,7 +37,7 @@
               <td></td>
               <td></td>
               <td></td>
-             
+
               <td>
                 <button
                   @click="handleCheckout"
@@ -79,21 +84,28 @@ export default {
     },
 
     handleCheckout() {
-      this.postPaymentIntent(this.cartItems);
+      const cartItems = this.getCartItems;
+      this.postPaymentIntent(cartItems);
     },
-    
-    handleDeleteItem(){
 
-    }
+    handleDeleteItem() {},
   },
 
   computed: {
-    getcartItems(){
-      return this.$store.state.cart.cartItems
-    } 
+    getCartItems() {
+      return this.$store.state.cart.cartItems;
+    },
   },
-
-  
 };
 </script>
-<style scoped></style>
+<style scoped>
+.no-items {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-transform: uppercase;
+}
+</style>
