@@ -53,18 +53,23 @@ export default {};
 <style>
 .carousel-item {
   height: 450px;
-}
 
+}
 .carousel-image-1 {
   background-image: url("../assets/images/image-1.jpg");
   background-size: cover;
+  background-repeat: no-repeat; 
+  background-position: center;
 }
 .carousel-image-2 {
   background-image: url("../assets/images/image-2.jpg");
   background-size: cover;
+    
+
 }
 .carousel-image-3 {
   background-image: url("../assets/images/image-3.jpg");
   background-size: cover;
+
 }
 </style>

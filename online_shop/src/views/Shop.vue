@@ -5,7 +5,7 @@
         <category-sidebar @categorySelected="handleCategorySelect" @selectedAll="handleSelectAll"></category-sidebar>
       </div>
       <div class="col-sm-12 col-md-8">
-        <div class="row mx-auto">
+        <div class="row justify-content-center">
           <p>{{this.$store.loading}}</p>
           <ProductCard
             v-for="product in products"

@@ -31,7 +31,9 @@ const mutations = {
     state.cartItems = [...updatedArray];
   },
 
-  REMOVE_FROM_CART() {},
+  REMOVE_FROM_CART(state, payload){
+    state.cartItems = [...payload]
+  },
 
   CALCULATE_CART_TOTAL(state, payload) {
     state.cartTotal = payload;
@@ -44,7 +46,10 @@ const actions = {
     dispatch("calculateCartTotal");
   },
 
-  removeCartItem() {},
+  deleteCartItem({commit}, itemID) {
+    const updatedArr =  state.cartItems.filter(item => item.id !== itemID);
+    commit("REMOVE_FROM_CART", updatedArr)
+  },
 
   updateItemQty({ commit, dispatch }, updateData) {
     commit("UPDATE_CART_ITEM", updateData);

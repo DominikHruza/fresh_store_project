@@ -27,12 +27,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "admin" */ "../views/AdminProduct.vue"),
   },
-  {
-    path: "/checkout",
-    name: "Checkout",
-    component: () =>
-      import(/* webpackChunkName: "checkout" */ "../views/Checkout.vue"),
-  },
+ 
 ];
 
 const router = new VueRouter({

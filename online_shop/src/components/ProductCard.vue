@@ -73,6 +73,10 @@ export default {
   height: 30rem;
 }
 
+.card-title {
+   text-transform: uppercase;
+}
+
 img {
   height: 13rem;
 }

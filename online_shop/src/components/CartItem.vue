@@ -42,11 +42,12 @@
     <td class="col-sm-1 col-md-1">
       <button>
         <button
-          class="btn btn-danger btn-sm rounded-0"
+          class="btn btn-danger btn-sm rounded-1"
           type="button"
           data-toggle="tooltip"
           data-placement="top"
           title="Delete"
+          @click="handleDelete"
         >
           <i class="fa fa-trash"></i>
         </button>
@@ -88,6 +89,10 @@ export default {
       this.itemTotal = this.quantity * this.item.price;
       this.updateItemQty({ updateID: this.item.id, type: "decrement" });
     },
+
+    handleDelete(){
+      this.$store.dispatch("deleteCartItem", this.item.id)
+    }
   },
 
   async created() {

@@ -14,7 +14,7 @@
             </tr>
           </thead>
           <tbody>
-            <cart-item v-for="cartItem in cartItems" :key="cartItem.id" :item="cartItem"></cart-item>
+            <cart-item v-for="cartItem in getcartItems" :key="cartItem.id" :item="cartItem"></cart-item>
           </tbody>
           <tfoot>
             <tr>
@@ -32,12 +32,7 @@
               <td></td>
               <td></td>
               <td></td>
-              <td>
-                <button type="button" class="btn btn-default">
-                  <span class="glyphicon glyphicon-shopping-cart"></span>
-                  Continue Shopping
-                </button>
-              </td>
+             
               <td>
                 <button
                   @click="handleCheckout"
@@ -71,7 +66,6 @@ export default {
 
   data() {
     return {
-      cartItems: [],
       postPaymentIntent,
     };
   },
@@ -87,11 +81,19 @@ export default {
     handleCheckout() {
       this.postPaymentIntent(this.cartItems);
     },
+    
+    handleDeleteItem(){
+
+    }
   },
 
-  async created() {
-    this.getAllCartItems();
+  computed: {
+    getcartItems(){
+      return this.$store.state.cart.cartItems
+    } 
   },
+
+  
 };
 </script>
 <style scoped></style>
