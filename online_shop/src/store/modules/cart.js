@@ -38,6 +38,10 @@ const mutations = {
   CALCULATE_CART_TOTAL(state, payload) {
     state.cartTotal = payload;
   },
+
+  CLEAR_CART(state) {
+    state.cartItems = [];
+  },
 };
 
 const actions = {
@@ -65,6 +69,10 @@ const actions = {
     });
 
     commit("CALCULATE_CART_TOTAL", total);
+  },
+
+  clearCartItems({ commit }) {
+    commit("CLEAR_CART");
   },
 };
 

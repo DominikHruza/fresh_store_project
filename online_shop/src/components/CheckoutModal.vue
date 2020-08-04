@@ -10,22 +10,20 @@
             <div id="card-element">
               <!--Stripe.js injects the Card Element-->
             </div>
-            <button id="submit">
+            <button @click="handlePayClick" id="submit">
               <div class="spinner hidden" id="spinner"></div>
               <span id="button-text">Pay</span>
             </button>
             <p id="card-error" role="alert"></p>
             <p class="result-message hidden">
               Payment succeeded, see the result in your
-              <a href="" target="_blank">Stripe dashboard.</a> Refresh the page
-              to pay again.
+              <a href target="_blank">Stripe dashboard.</a>
             </p>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <p>This is Stripe test mode, no real payment being done. Only for dev purposes</p>
         </div>
       </div>
     </div>
@@ -33,7 +31,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    handlePayClick() {
+      this.$store.dispatch("clearCartItems");
+    },
+  },
+};
 </script>
 
 <style scoped>

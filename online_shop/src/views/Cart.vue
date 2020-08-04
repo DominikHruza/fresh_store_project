@@ -2,7 +2,9 @@
   <div class="container">
     <CheckoutModal />
     <div class="row">
-      <h2 class="no-items" v-if="getCartItems.length === 0">No items in cart</h2>
+      <h2 class="no-items" v-if="getCartItems.length === 0">
+        No items in cart
+      </h2>
       <div v-else class="col-sm-12 col-md-10 col-md-offset-1">
         <table class="table table-hover">
           <thead>
@@ -17,7 +19,7 @@
           <tbody>
             <cart-item
               v-for="(cartItem, idx) in getCartItems"
-              :key="`${Date.now()-idx}`"
+              :key="idx"
               :item="cartItem"
             ></cart-item>
           </tbody>

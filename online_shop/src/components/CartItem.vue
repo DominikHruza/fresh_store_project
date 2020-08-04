@@ -2,10 +2,14 @@
   <tr class="item-row">
     <td class="product-col col-sm-8 col-md-6">
       <div class="media">
-        <img class="media-object" :src="item.imageUrl" style="width: 72px; height: 72px;" />
+        <img
+          class="media-object"
+          :src="item.imageUrl"
+          style="width: 72px; height: 72px;"
+        />
 
         <div class="media-body">
-          <h4 class="media-heading item-name">{{item.name}}</h4>
+          <h4 class="media-heading item-name">{{ item.name }}</h4>
         </div>
       </div>
     </td>
@@ -14,17 +18,25 @@
         <div class="input-group">
           <span class="input-group-btn">
             <!-- Decrement item -->
-            <button type="button" class="btn btn-danger btn-number" @click="handleDecrement">
+            <button
+              type="button"
+              class="btn btn-danger btn-number"
+              @click="handleDecrement"
+            >
               <span>
                 <i class="fa fa-minus" aria-hidden="true"></i>
               </span>
             </button>
           </span>
           <!-- Input value -->
-          <input type="text" class="input-number" :value="quantity" min="1" max="100" />
+          <input type="text" class="input-number" :value="quantity" />
           <span class="input-group-btn">
             <!-- Increment item -->
-            <button type="button" class="btn btn-success btn-number" @click="handleIncrement">
+            <button
+              type="button"
+              class="btn btn-success btn-number"
+              @click="handleIncrement"
+            >
               <span>
                 <i class="fa fa-plus" aria-hidden="true"></i>
               </span>
@@ -34,10 +46,10 @@
       </div>
     </td>
     <td class="col-sm-1 col-md-1 text-center">
-      <strong>€{{item.price}}</strong>
+      <strong>€{{ item.price }}</strong>
     </td>
     <td class="col-sm-1 col-md-1 text-center">
-      <strong>€{{itemTotal}}</strong>
+      <strong>€{{ itemTotal }}</strong>
     </td>
     <td class="col-sm-1 col-md-1">
       <button>
@@ -85,14 +97,19 @@ export default {
     },
 
     handleDecrement() {
+      //allow only positive
+      if (this.quantity === 1) {
+        return;
+      }
+
       this.quantity--;
       this.itemTotal = this.quantity * this.item.price;
       this.updateItemQty({ updateID: this.item.id, type: "decrement" });
     },
 
-    handleDelete(){
-      this.$store.dispatch("deleteCartItem", this.item.id)
-    }
+    handleDelete() {
+      this.$store.dispatch("deleteCartItem", this.item.id);
+    },
   },
 
   async created() {

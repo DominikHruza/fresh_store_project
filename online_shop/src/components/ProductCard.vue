@@ -28,8 +28,12 @@
             <i class="fas fa-shopping-cart"></i> Add to Cart
           </button>
         </div>
-        <div v-for="alert in getAlerts" :key="alert.id">
-          <AlertBox  :alertMsg="alert.msg" v-if="alert == item.product_id"/>
+        <div class="mt-2" v-for="alert in getAlerts" :key="alert.id">
+          <AlertBox
+            color="alert-success"
+            :alertMsg="alert.msg"
+            v-if="alert.id === item.id_product"
+          />
         </div>
       </div>
     </div>
@@ -37,13 +41,12 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
-import AlertBox from "../components/AlertBox"
+import { mapGetters } from "vuex";
+import AlertBox from "../components/AlertBox";
 export default {
-  
   components: {
-    AlertBox
-  }, 
+    AlertBox,
+  },
 
   props: ["colWidth", "item"],
 
@@ -55,6 +58,11 @@ export default {
         (item) => item.id === this.item.id_product
       );
 
+      this.$store.commit("SET_ALERTS", {
+        msg: "Item added to cart!",
+        id: this.item.id_product,
+      });
+
       if (itemInCart) {
         await this.$store.dispatch("updateItemQty", {
           updateID: this.item.id_product,
@@ -63,8 +71,6 @@ export default {
 
         return;
       }
-
-      this.$store.commit("SET_ALERTS", { msg: "Item added to cart!", id: this.item.id_product});
 
       const cartItem = {
         id: this.item.id_product,

@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import shop from "./modules/shop";
 import cart from "./modules/cart";
 import axios from "axios";
+import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -18,7 +19,7 @@ export default new Vuex.Store({
     },
 
     REMOVE_ALERT(state) {
-      state.alerts.shift()
+      state.alerts.shift();
     },
 
     SET_CATEGORIES(state, payload) {
@@ -50,9 +51,9 @@ export default new Vuex.Store({
       return state.categories;
     },
 
-    getAlerts(state){
+    getAlerts(state) {
       return state.alerts;
-    }
+    },
   },
 
   modules: {
