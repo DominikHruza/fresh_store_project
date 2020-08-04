@@ -28,19 +28,22 @@
             <i class="fas fa-shopping-cart"></i> Add to Cart
           </button>
         </div>
-        <div v-for="(alert, index) in getAlerts" :key="index"></div>
-        <AlertBox :alertMsg="alert.msg" color="success" />
+        <div v-for="alert in getAlerts" :key="alert.id">
+          <AlertBox  :alertMsg="alert.msg" v-if="alert == item.product_id"/>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import AlertBox from "../components/AlertBox";
+import {mapGetters} from "vuex";
+import AlertBox from "../components/AlertBox"
 export default {
+  
   components: {
-    AlertBox,
-  },
+    AlertBox
+  }, 
 
   props: ["colWidth", "item"],
 
@@ -58,9 +61,10 @@ export default {
           type: "increment",
         });
 
-        this.$store.commit("SET_ALERTS", { msg: "Item added to cart!" });
         return;
       }
+
+      this.$store.commit("SET_ALERTS", { msg: "Item added to cart!", id: this.item.id_product});
 
       const cartItem = {
         id: this.item.id_product,
@@ -69,18 +73,19 @@ export default {
         imageUrl: this.item.image_url,
         quantity: 1,
       };
+
       this.$store.dispatch("addToCart", cartItem);
     },
   },
+
   computed: {
-    getAlerts: () => {
-      return this.$store.state.alerts;
-    },
+    ...mapGetters(["getAlerts"]),
   },
+
   watch: {
     getAlerts(val) {
       setTimeout(() => {
-        if (val.length !== 0) this.removeAlert();
+        if (val.length !== 0) this.$store.dispatch("removeAlert");
       }, 3000);
     },
   },

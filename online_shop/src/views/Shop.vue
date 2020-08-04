@@ -66,6 +66,7 @@ export default {
 
     async getProductByCategory(categoryID) {
       this.$store.dispatch("isLoading", true);
+      
       const response = await axios.get(
         `/api/product/get-products?category=${categoryID}&page=${this.page}`
       );

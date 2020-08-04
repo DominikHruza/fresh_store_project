@@ -14,11 +14,11 @@ export default new Vuex.Store({
 
   mutations: {
     SET_ALERTS(state, payload) {
-      state.alerts = [...state.alerts, payload];
+      state.alerts = [payload];
     },
 
     REMOVE_ALERT(state) {
-      state.alerts.shift();
+      state.alerts.shift()
     },
 
     SET_CATEGORIES(state, payload) {
@@ -49,6 +49,10 @@ export default new Vuex.Store({
     getCategories(state) {
       return state.categories;
     },
+
+    getAlerts(state){
+      return state.alerts;
+    }
   },
 
   modules: {
